@@ -5,7 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>KenanCalc - Elmi Kalkulyator</title>
 
-<!-- PWA Meta Tags -->
+  <link rel="manifest" href="manifest.json" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(reg => console.log("✅ Service Worker qeydiyyatdan keçdi!", reg))
+          .catch(err => console.error("❌ Service Worker xətası:", err));
+      });
+    }
+  </script><!-- PWA Meta Tags -->
 <meta name="description" content="Güclü elmi kalkulyator Azərbaycan dilində - Desktop və Mobil App" />
 <meta name="theme-color" content="#4a90e2" />
 <meta name="mobile-web-app-capable" content="yes" />
