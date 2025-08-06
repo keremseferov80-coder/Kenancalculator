@@ -1,15 +1,26 @@
-self.addEventListener("install", (e) => {
-  e.waitUntil(
-    caches.open("kenan-calc-cache").then((cache) => {
-      return cache.addAll(["./", "./index.html"]);
+const CACHE_NAME = "kenan-calc-v1";
+const urlsToCache = [
+  "/",
+  "/index.html",
+  "/manifest.json",
+  "/assets/icon-192x192.png",
+  "/assets/icon-512x512.png"
+];
+
+// Quraşdırma zamanı faylları keşlə
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
     })
   );
 });
 
-self.addEventListener("fetch", (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
+// İstək zamanı keşlənmiş versiyanı göstər
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
     })
   );
 });
