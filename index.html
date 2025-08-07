@@ -1755,5 +1755,29 @@
   </script>
 </div>
 
+<script>
+  const input = document.getElementById("gameAnswer");
+
+  input?.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      submitAnswer();
+    }
+  });
+
+  function submitAnswer() {
+    const cavab = input.value.trim();
+    if (typeof checkAnswer === "function") {
+      checkAnswer(cavab);
+    }
+    input.value = "";
+  }
+
+  function appendToInput(value) {
+    input.value += value;
+    input.focus();
+  }
+</script>
+
+
 </body>
 </html>
