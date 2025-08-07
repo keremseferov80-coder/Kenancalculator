@@ -1404,16 +1404,15 @@
     }, 100);
 
         // Klaviatura dəstəyi
-    const handleGameKeyPress = (e) => {
-      if (e.key === 'Escape') {
-        closeModal();
-      } else if (e.key === 'Enter') {
-        checkAnswer();
-      }
-    };
- 
+    function handleGameKeyPress(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+  } else if (e.key === 'Enter') {
+    checkAnswer();
+  }
+}
 
-    const input = document.getElementById('gameAnswer');
+const input = document.getElementById('gameAnswer');
 if (input) {
   input.addEventListener('keydown', handleGameKeyPress);
 }
