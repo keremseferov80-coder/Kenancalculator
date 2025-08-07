@@ -1373,9 +1373,6 @@
                style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 150px;">
       </div>
 
-document.getElementById("gameAnswer")?.focus();
-
-      
       <div style="margin-bottom: 15px;">
         <div>Xal: <span id="gameScore">${score}</span></div>
         <div>Vaxt: <span id="gameTime">${timeLeft}</span> saniyə</div>
@@ -1393,7 +1390,10 @@ document.getElementById("gameAnswer")?.focus();
         Bitir
       </button>
     `;
-    
+
+    document.getElementById("gameAnswer")?.focus();
+
+
     modal.appendChild(popup);
     document.body.appendChild(modal);
     
@@ -1757,7 +1757,6 @@ document.getElementById("gameAnswer")?.focus();
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </div>
-
 <script>
   const input = document.getElementById("gameAnswer");
 
