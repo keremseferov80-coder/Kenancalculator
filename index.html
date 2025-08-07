@@ -1,147 +1,1769 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KenanCalc - Elmi Kalkulyator</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- AdMob SDK -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-828564172053236"
-     crossorigin="anonymous"></script>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <div class="language-selector">
-        <a href="#">Azərbaycan</a>
-        <a href="#">English</a>
-        <a href="#">Türkçe</a>
-        <a href="#">Rusça</a>
-      </div>
-      <div class="theme-selector">
-        <button class="theme-btn" style="background-color: blue;">Mavi</button>
-        <button class="theme-btn" style="background-color: red;">Qırmızı</button>
-        <button class="theme-btn" style="background-color: green;">Yaşıl</button>
-        <button class="theme-btn" style="background-color: orange;">Narıncı</button>
-        <button class="theme-btn" style="background-color: purple;">Bənövşəyi</button>
-        <button class="theme-btn" style="background-color: darkgray;">Tünd Gri</button>
-      </div>
-      <label>
-        <input type="checkbox" id="dark-theme-toggle"> Qaranlıq Mövzu
-      </label>
-      <button class="premium-btn">🎁 Premium Al</button>
-      <div class="premium-status">⭐ Premium Aktiv</div>
-    </header>
 
-    <main>
-      <div class="calculator">
-        <div class="display">0</div>
-        <div class="buttons">
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
-          <button>÷</button>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
-          <button>×</button>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>−</button>
-          <button>0</button>
-          <button>.</button>
-          <button>=</button>
-          <button>+</button>
-          <button>C</button>
-          <button>⌫</button>
-          <button>(</button>
-          <button>)</button>
-          <button>sin</button>
-          <button>cos</button>
-          <button>tan</button>
-          <button>asin</button>
-          <button>acos</button>
-          <button>atan</button>
-          <button>sinh</button>
-          <button>cosh</button>
-          <button>tanh</button>
-          <button>asinh</button>
-          <button>10ˣ</button>
-          <button>√</button>
-          <button>∛</button>
-          <button>xʸ</button>
-          <button>|x|</button>
-          <button>n!</button>
-          <button>⌊x⌋</button>
-          <button>⌈x⌉</button>
-          <button>round</button>
-          <button>π</button>
-          <button>Rnd</button>
-          <button>D°→R</button>
-          <button>📏</button>
-          <button>🎮</button>
-          <button>🏆</button>
-          <button>log₁₀</button>
-          <button>ln</button>
-          <button>eˣ</button>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KenanCalc - Elmi Kalkulyator</title>
+
+<link rel="manifest" href="./manifest.json" />
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js');
+    });
+  }
+</script>
+
+<meta name="description" content="Güclü elmi kalkulyator Azərbaycan dilində - Desktop və Mobil App" />
+<meta name="theme-color" content="#4a90e2" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="KenanCalc" />
+<meta name="msapplication-TileColor" content="#4a90e2" />
+<meta name="msapplication-tap-highlight" content="no" />
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json" />
+
+<!-- Icons -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180x180.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="assets/icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="assets/icon-144x144.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="assets/icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="assets/icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="assets/icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="assets/icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="assets/icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="57x57" href="assets/icon-57x57.png" />
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+<!-- Google AdMob -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0; font-family: 'Poppins', Arial, sans-serif;
+    background: var(--bg-color); color: var(--text-color);
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; transition: all 0.5s ease;
+    flex-direction: column; overflow-x: hidden;
+  }
+
+  :root {
+    --bg-color-light: #eef2f7; --bg-color-dark: #121212;
+    --text-color-light: #222; --text-color-dark: #eee;
+    --main-color: #4a90e2; --main-rgb: 74,144,226;
+    --btn-bg-light: rgba(var(--main-rgb), 0.85);
+    --btn-bg-dark: rgba(var(--main-rgb), 0.4);
+    --btn-hover-light: #357ab8; --btn-hover-dark: #5599ee;
+    --elmi-btn-bg-light: rgba(123,67,151,0.85);
+    --elmi-btn-bg-dark: rgba(123,67,151,0.4);
+    --elmi-btn-hover-light: #5e3271; --elmi-btn-hover-dark: #8855aa;
+    --error-color: #e74c3c; --success-color: #27ae60;
+  }
+
+  body.light {
+    --bg-color: var(--bg-color-light); --text-color: var(--text-color-light);
+    --btn-bg: var(--btn-bg-light); --btn-hover: var(--btn-hover-light);
+    --elmi-btn-bg: var(--elmi-btn-bg-light); --elmi-btn-hover: var(--elmi-btn-hover-light);
+  }
+  body.dark {
+    --bg-color: var(--bg-color-dark); --text-color: var(--text-color-dark);
+    --btn-bg: var(--btn-bg-dark); --btn-hover: var(--btn-hover-dark);
+    --elmi-btn-bg: var(--elmi-btn-bg-dark); --elmi-btn-hover: var(--elmi-btn-hover-dark);
+  }
+
+  @keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+
+  .main-wrapper {
+    display: flex; gap: 20px; width: 95vw; max-width: 1200px;
+    flex-wrap: wrap; justify-content: center;
+  }
+
+  .container {
+    background: var(--bg-color); width: 450px; max-width: 100%;
+    padding: 25px 30px 40px; border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12), 0 8px 30px rgba(0,0,0,0.06);
+    position: relative; animation: fadeInScale 0.7s ease forwards;
+  }
+
+  h1 {
+    margin: 0 0 15px; font-weight: 600; font-size: 1.8rem;
+    color: var(--text-color); user-select: none; text-align: center;
+    letter-spacing: 1px; text-shadow: 0 0 6px rgba(var(--main-rgb), 0.55);
+  }
+
+  #display {
+    width: 100%; height: 80px; background: #f9f9f9; border-radius: 15px;
+    font-size: 1.8rem; text-align: right; padding: 15px 20px;
+    box-shadow: inset 0 0 14px #aaa; overflow-wrap: break-word;
+    user-select: none; margin-bottom: 20px; color: #222;
+    transition: color 0.3s ease; font-family: 'Courier New', monospace;
+  }
+  #display.error { color: var(--error-color); font-weight: 700; animation: shake 0.4s ease; }
+  #display.success { color: var(--success-color); font-weight: 600; }
+
+  .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 15px; }
+  .elmi-buttons { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 15px; }
+  .advanced-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
+
+  button {
+    padding: 15px 8px; font-size: 1.1rem; font-weight: 600; border: none;
+    border-radius: 12px; cursor: pointer; color: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
+    user-select: none; position: relative; overflow: hidden; min-height: 55px;
+    touch-action: manipulation; /* Mobil üçün touch optimizasiyası */
+  }
+  button:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,0,0,0.3); }
+  button:active { transform: scale(0.95); }
+
+  .buttons button { background-color: var(--btn-bg); }
+  .buttons button:hover { background-color: var(--btn-hover); box-shadow: 0 6px 20px var(--btn-hover); }
+
+  .elmi-buttons button, .advanced-buttons button {
+    background-color: var(--elmi-btn-bg); font-size: 0.95rem; padding: 12px 6px;
+  }
+  .elmi-buttons button:hover, .advanced-buttons button:hover {
+    background-color: var(--elmi-btn-hover); box-shadow: 0 6px 20px var(--elmi-btn-hover);
+  }
+
+  .controls {
+    display: flex; justify-content: space-between; margin-bottom: 15px;
+    user-select: none; flex-wrap: wrap; gap: 10px;
+  }
+  select, .theme-toggle {
+    font-size: 1rem; padding: 6px 12px; border-radius: 10px;
+    border: 1.8px solid #ccc; cursor: pointer; background-color: white;
+    color: #444; transition: background-color 0.3s ease; min-width: 120px;
+  }
+  select:hover, .theme-toggle:hover { background-color: #ddd; }
+  .theme-toggle {
+    user-select: none; border: none; background-color: var(--btn-bg);
+    color: white; font-weight: 600; border-radius: 15px; padding: 8px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .theme-toggle:active { transform: scale(0.95); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+  #history, #constants {
+    width: 280px; max-height: 500px; background: var(--bg-color);
+    border-radius: 20px; box-shadow: 0 0 15px rgba(var(--main-rgb),0.25), 0 5px 10px rgba(0,0,0,0.07);
+    padding: 20px; overflow-y: auto; font-size: 1rem; user-select: none;
+    display: flex; flex-direction: column;
+  }
+  #history h2, #constants h2 {
+    margin-top: 0; color: var(--text-color); text-align: center;
+    margin-bottom: 15px; text-shadow: 0 0 5px rgba(var(--main-rgb),0.4);
+  }
+  #history ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; overflow-y: auto; }
+  #history li {
+    margin-bottom: 10px; border-bottom: 1px solid #aaa2; padding-bottom: 6px;
+    color: var(--text-color); cursor: pointer; user-select: none;
+    transition: background-color 0.3s ease; font-family: 'Courier New', monospace; font-size: 0.9rem;
+  }
+  #history li:hover {
+    background-color: rgba(var(--main-rgb),0.15); border-radius: 8px; padding: 4px 8px;
+  }
+  #clearHistoryBtn {
+    margin-top: 10px; background-color: var(--error-color);
+    box-shadow: 0 4px 12px rgba(231,76,60,0.4); font-weight: 600;
+    color: white; border-radius: 12px; padding: 10px 0; cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    user-select: none; border: none;
+  }
+  #clearHistoryBtn:hover {
+    background-color: #c0392b; box-shadow: 0 6px 18px rgba(192,57,43,0.5);
+  }
+  #clearHistoryBtn:active {
+    transform: scale(0.95); box-shadow: 0 2px 8px rgba(192,57,43,0.6);
+  }
+
+  .constant-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px; margin-bottom: 8px; background: rgba(var(--main-rgb), 0.1);
+    border-radius: 8px; cursor: pointer; transition: background-color 0.3s ease;
+  }
+  .constant-item:hover { background: rgba(var(--main-rgb), 0.2); }
+  .constant-name { font-weight: 600; color: var(--text-color); }
+  .constant-value { font-family: 'Courier New', monospace; color: var(--text-color); opacity: 0.8; }
+
+  /* Portrait orientasiya üçün xüsusi stillər */
+  @media (orientation: portrait) and (max-width: 600px) {
+    .main-wrapper { flex-direction: column; gap: 15px; }
+    .container { width: 95vw; padding: 20px; }
+    button { min-height: 60px; font-size: 1.3rem; padding: 20px 8px; }
+    .elmi-buttons button, .advanced-buttons button { 
+      font-size: 1.1rem; padding: 18px 6px; min-height: 55px; 
+    }
+    #display { height: 90px; font-size: 2rem; }
+    .buttons { gap: 15px; }
+    .elmi-buttons, .advanced-buttons { gap: 12px; }
+  }
+
+  /* Landscape orientasiya üçün xüsusi stillər */
+  @media (orientation: landscape) and (max-height: 600px) {
+    .main-wrapper { flex-direction: row; gap: 15px; }
+    .container { width: 60vw; padding: 15px; }
+    #history, #constants { width: 20vw; max-height: 80vh; }
+    button { min-height: 45px; font-size: 1rem; padding: 12px 6px; }
+    .elmi-buttons button, .advanced-buttons button { 
+      font-size: 0.9rem; padding: 10px 4px; min-height: 40px; 
+    }
+    #display { height: 70px; font-size: 1.6rem; }
+  }
+
+  @media (max-width: 900px) {
+    .main-wrapper { flex-direction: column; align-items: center; }
+    #history, #constants { width: 90vw; max-height: 250px; margin-top: 15px; border-radius: 15px; }
+    .container { width: 90vw; max-width: none; }
+    button { padding: 18px 0; font-size: 1.2rem; min-height: 55px; }
+    .elmi-buttons button, .advanced-buttons button { font-size: 1rem; padding: 15px 4px; }
+    .controls { gap: 8px; justify-content: center; }
+  }
+
+  /* Çox kiçik ekranlar üçün */
+  @media (max-width: 480px) {
+    .container { width: 98vw; padding: 15px; }
+    button { min-height: 65px; font-size: 1.4rem; }
+    .elmi-buttons button, .advanced-buttons button { 
+      font-size: 1.2rem; min-height: 60px; 
+    }
+    #display { height: 100px; font-size: 2.2rem; }
+    h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body class="light">
+
+<div class="main-wrapper">
+  <div class="container">
+    <h1>KenanCalc - Elmi Kalkulyator</h1>
+    <div class="controls">
+      <select id="language" title="Dil seçimi">
+        <option value="az" selected>Azərbaycan</option>
+        <option value="en">English</option>
+        <option value="tr">Türkçe</option>
+        <option value="ru">Русский</option>
+      </select>
+
+      <select id="colorPicker" title="Düymələrin rəngini seçin">
+        <option value="#4a90e2" selected>Mavi</option>
+        <option value="#e74c3c">Qırmızı</option>
+        <option value="#27ae60">Yaşıl</option>
+        <option value="#f39c12">Narıncı</option>
+        <option value="#8e44ad">Bənövşəyi</option>
+        <option value="#34495e">Tünd Gri</option>
+      </select>
+
+      <button class="theme-toggle" id="themeToggle">Qaranlıq Mövzu</button>
+      
+      <!-- Mükafatlı Reklam Düyməsi -->
+      <button class="reward-ad-btn" id="rewardAdBtn" title="Reklam izləyib premium funksiyalar əldə et">
+        🎁 Premium Al
+      </button>
+    </div>
+    
+    <!-- Premium Status -->
+    <div class="premium-status" id="premiumStatus" style="display: none;">
+      ⭐ Premium Aktiv - <span id="premiumTimer"></span>
+    </div>
+
+    <div id="display">0</div>
+
+    <!-- Əsas düymələr -->
+    <div class="buttons">
+      <button onclick="handleClick('7')">7</button>
+      <button onclick="handleClick('8')">8</button>
+      <button onclick="handleClick('9')">9</button>
+      <button onclick="handleClick('/')" title="Bölmə">÷</button>
+
+      <button onclick="handleClick('4')">4</button>
+      <button onclick="handleClick('5')">5</button>
+      <button onclick="handleClick('6')">6</button>
+      <button onclick="handleClick('*')" title="Vurma">×</button>
+
+      <button onclick="handleClick('1')">1</button>
+      <button onclick="handleClick('2')">2</button>
+      <button onclick="handleClick('3')">3</button>
+      <button onclick="handleClick('-')" title="Çıxma">−</button>
+
+      <button onclick="handleClick('0')">0</button>
+      <button onclick="handleClick('.')">.</button>
+      <button onclick="calculate()" title="Hesabla">=</button>
+      <button onclick="handleClick('+')" title="Toplama">+</button>
+
+      <button onclick="clearDisplay()" title="Təmizlə">C</button>
+      <button onclick="backspace()" title="Sil">⌫</button>
+      <button onclick="handleClick('(')">(</button>
+      <button onclick="handleClick(')')">) </button>
+    </div>
+
+    <!-- Trigonometrik funksiyalar -->
+    <div class="elmi-buttons">
+      <button onclick="handleClick('Math.sin(')" title="Sinus">sin</button>
+      <button onclick="handleClick('Math.cos(')" title="Kosinus">cos</button>
+      <button onclick="handleClick('Math.tan(')" title="Tanjant">tan</button>
+      <button onclick="handleClick('Math.asin(')" title="Tərs sinus">asin</button>
+      <button onclick="handleClick('Math.acos(')" title="Tərs kosinus">acos</button>
+
+      <button onclick="handleClick('Math.atan(')" title="Tərs tanjant">atan</button>
+      <button onclick="handleClick('Math.sinh(')" title="Hiperbolik sinus">sinh</button>
+      <button onclick="handleClick('Math.cosh(')" title="Hiperbolik kosinus">cosh</button>
+      <button onclick="handleClick('Math.tanh(')" title="Hiperbolik tanjant">tanh</button>
+      <button onclick="handleClick('Math.asinh(')" title="Tərs hiperbolik sinus">asinh</button>
+    </div>
+
+    <!-- Logaritm və eksponensial funksiyalar -->
+    <div class="advanced-buttons">
+      <!-- Premium funksiyalar adi düymələrdən silindi -->
+      <button onclick="handleClick('Math.pow(10,')" title="10 üstü x">10ˣ</button>
+
+      <button onclick="handleClick('Math.sqrt(')" title="Kök altı">√</button>
+      <button onclick="handleClick('Math.cbrt(')" title="Kub kökü">∛</button>
+      <button onclick="handleClick('Math.pow(')" title="x üstü y">xʸ</button>
+      <button onclick="handleClick('Math.abs(')" title="Mütləq qiymət">|x|</button>
+
+      <button onclick="factorial()" title="Faktorial">n!</button>
+      <button onclick="handleClick('Math.floor(')" title="Aşağı yuvarlaqlaşdır">⌊x⌋</button>
+      <button onclick="handleClick('Math.ceil(')" title="Yuxarı yuvarlaqlaşdır">⌈x⌉</button>
+      <button onclick="handleClick('Math.round(')" title="Yuvarlaqlaşdır">round</button>
+
+      <button onclick="handleClick('Math.PI')" title="Pi sabiti">π</button>
+      <button onclick="randomNumber()" title="Təsadüfi rəqəm">Rnd</button>
+      <button onclick="degToRad()" title="Dərəcədən radiana">D°→R</button>
+      
+      <!-- Vahid Çevirmələri -->
+      <button onclick="showUnitConverter()" title="Vahid çevirmələri">📏</button>
+      <button onclick="showMathGame()" title="Riyaziyyat oyunu">🎮</button>
+      <button onclick="showAchievements()" title="Mükafatlar">🏆</button>
+      
+      <!-- Premium Funksiyalar -->
+      <button onclick="usePremiumFunction('log10')" class="premium-btn" title="Onluq loqarifm (Premium)">log₁₀</button>
+      <button onclick="usePremiumFunction('ln')" class="premium-btn" title="Təbii loqarifm (Premium)">ln</button>
+      <button onclick="usePremiumFunction('exp')" class="premium-btn" title="Eksponensial (Premium)">eˣ</button>
+    </div>
+  </div>
+
+  <!-- Tarixçə paneli -->
+  <div id="history">
+    <h2>Tarixçə</h2>
+    <ul id="historyList"></ul>
+    <button id="clearHistoryBtn">Təmizlə</button>
+  </div>
+
+  <!-- Sabitlər paneli -->
+  <div id="constants">
+    <h2>Fiziki Sabitlər</h2>
+    <div id="constantsList"></div>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+  const languageSelect = document.getElementById('language');
+  const colorPicker = document.getElementById('colorPicker');
+  const themeToggleBtn = document.getElementById('themeToggle');
+  const historyList = document.getElementById('historyList');
+  const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+  const constantsList = document.getElementById('constantsList');
+
+  let history = [];
+
+  // Çoxdilli mətnlər
+  const texts = {
+    az: {
+      title: 'KenanCalc - Elmi Kalkulyator',
+      history: 'Tarixçə',
+      constants: 'Fiziki Sabitlər',
+      clear: 'Təmizlə',
+      themeLight: 'İşıqlı Mövzu',
+      themeDark: 'Qaranlıq Mövzu',
+      colorBlue: 'Mavi',
+      colorRed: 'Qırmızı',
+      colorGreen: 'Yaşıl',
+      colorOrange: 'Narıncı',
+      colorPurple: 'Bənövşəyi',
+      colorGray: 'Tünd Gri',
+      errorEmpty: 'Heç nə daxil edilməyib!',
+      errorInvalid: 'İfadədə icazəsiz simvollar var!',
+      errorDivision: 'Sıfıra bölmə xəta!',
+      errorCalculation: 'Nəticə hesablana bilmədi!',
+      errorExpression: 'İfadə səhvdir!',
+      errorFactorial: 'Faktorial xəta!',
+      errorNumber: 'Ədəd daxil edin!'
+    },
+    en: {
+      title: 'KenanCalc - Scientific Calculator',
+      history: 'History',
+      constants: 'Physical Constants',
+      clear: 'Clear',
+      themeLight: 'Light Theme',
+      themeDark: 'Dark Theme',
+      colorBlue: 'Blue',
+      colorRed: 'Red',
+      colorGreen: 'Green',
+      colorOrange: 'Orange',
+      colorPurple: 'Purple',
+      colorGray: 'Dark Gray',
+      errorEmpty: 'Nothing entered!',
+      errorInvalid: 'Invalid characters in expression!',
+      errorDivision: 'Division by zero error!',
+      errorCalculation: 'Could not calculate result!',
+      errorExpression: 'Invalid expression!',
+      errorFactorial: 'Factorial error!',
+      errorNumber: 'Enter a number!'
+    },
+    tr: {
+      title: 'KenanCalc - Bilimsel Hesap Makinesi',
+      history: 'Geçmiş',
+      constants: 'Fiziksel Sabitler',
+      clear: 'Temizle',
+      themeLight: 'Açık Tema',
+      themeDark: 'Koyu Tema',
+      colorBlue: 'Mavi',
+      colorRed: 'Kırmızı',
+      colorGreen: 'Yeşil',
+      colorOrange: 'Turuncu',
+      colorPurple: 'Mor',
+      colorGray: 'Koyu Gri',
+      errorEmpty: 'Hiçbir şey girilmedi!',
+      errorInvalid: 'İfadede geçersiz karakterler var!',
+      errorDivision: 'Sıfıra bölme hatası!',
+      errorCalculation: 'Sonuç hesaplanamadı!',
+      errorExpression: 'Geçersiz ifade!',
+      errorFactorial: 'Faktöriyel hatası!',
+      errorNumber: 'Bir sayı girin!'
+    },
+    ru: {
+      title: 'KenanCalc - Научный Калькулятор',
+      history: 'История',
+      constants: 'Физические Константы',
+      clear: 'Очистить',
+      themeLight: 'Светлая Тема',
+      themeDark: 'Тёмная Тема',
+      colorBlue: 'Синий',
+      colorRed: 'Красный',
+      colorGreen: 'Зелёный',
+      colorOrange: 'Оранжевый',
+      colorPurple: 'Фиолетовый',
+      colorGray: 'Тёмно-серый',
+      errorEmpty: 'Ничего не введено!',
+      errorInvalid: 'Недопустимые символы в выражении!',
+      errorDivision: 'Деление на ноль!',
+      errorCalculation: 'Не удалось вычислить результат!',
+      errorExpression: 'Неверное выражение!',
+      errorFactorial: 'Ошибка факториала!',
+      errorNumber: 'Введите число!'
+    }
+  };
+
+  // Fiziki sabitlər
+  const physicsConstants = {
+    'c': {
+      names: {
+        az: 'İşıq sürəti',
+        en: 'Speed of light',
+        tr: 'Işık hızı',
+        ru: 'Скорость света'
+      },
+      value: 299792458,
+      unit: 'm/s'
+    },
+    'h': {
+      names: {
+        az: 'Planck sabiti',
+        en: 'Planck constant',
+        tr: 'Planck sabiti',
+        ru: 'Постоянная Планка'
+      },
+      value: 6.62607015e-34,
+      unit: 'J⋅s'
+    },
+    'G': {
+      names: {
+        az: 'Qravitasiya sabiti',
+        en: 'Gravitational constant',
+        tr: 'Gravitasyon sabiti',
+        ru: 'Гравитационная постоянная'
+      },
+      value: 6.67430e-11,
+      unit: 'm³⋅kg⁻¹⋅s⁻²'
+    },
+    'e_charge': {
+      names: {
+        az: 'Elektron yükü',
+        en: 'Elementary charge',
+        tr: 'Elektron yükü',
+        ru: 'Элементарный заряд'
+      },
+      value: 1.602176634e-19,
+      unit: 'C'
+    },
+    'me': {
+      names: {
+        az: 'Elektron kütləsi',
+        en: 'Electron mass',
+        tr: 'Elektron kütlesi',
+        ru: 'Масса электрона'
+      },
+      value: 9.1093837015e-31,
+      unit: 'kg'
+    },
+    'mp': {
+      names: {
+        az: 'Proton kütləsi',
+        en: 'Proton mass',
+        tr: 'Proton kütlesi',
+        ru: 'Масса протона'
+      },
+      value: 1.67262192369e-27,
+      unit: 'kg'
+    },
+    'Na': {
+      names: {
+        az: 'Avogadro sabiti',
+        en: 'Avogadro constant',
+        tr: 'Avogadro sabiti',
+        ru: 'Постоянная Авогадро'
+      },
+      value: 6.02214076e23,
+      unit: 'mol⁻¹'
+    },
+    'k': {
+      names: {
+        az: 'Boltzmann sabiti',
+        en: 'Boltzmann constant',
+        tr: 'Boltzmann sabiti',
+        ru: 'Постоянная Больцмана'
+      },
+      value: 1.380649e-23,
+      unit: 'J⋅K⁻¹'
+    },
+    'R': {
+      names: {
+        az: 'Qaz sabiti',
+        en: 'Gas constant',
+        tr: 'Gaz sabiti',
+        ru: 'Газовая постоянная'
+      },
+      value: 8.314462618,
+      unit: 'J⋅mol⁻¹⋅K⁻¹'
+    }
+  };
+
+  // Vibration feedback funksiyası
+  function vibrate(duration = 50) {
+    if ('vibrate' in navigator) {
+      navigator.vibrate(duration);
+    }
+  }
+
+  // Funksiya: hesablama düymələrinə klik
+  function handleClick(value) {
+    // Mobil cihazlarda vibration feedback
+    vibrate(30);
+    
+    if(display.classList.contains('error')) {
+      display.classList.remove('error');
+      display.textContent = '';
+    }
+    if(display.classList.contains('success')) {
+      display.classList.remove('success');
+    }
+
+    if(display.textContent === '0' && !isOperator(value)) {
+      display.textContent = value;
+    } else {
+      display.textContent += value;
+    }
+  }
+
+  function isOperator(char) {
+    return ['+', '-', '*', '/', '.', '(', ')'].includes(char);
+  }
+
+  // Hesablama
+  function calculate() {
+    // Hesablama zamanı daha uzun vibration
+    vibrate(100);
+    
+    try {
+      const expr = display.textContent;
+      if(expr.trim() === '' || expr === '0') {
+        showError(getText('errorEmpty'));
+        return;
+      }
+
+      // Təhlükəsizlik yoxlaması
+      // Yalnız icazə verilən funksiyalar və operatorlar üçün regex
+      if(!/^([0-9+\-*/(). ]+|Math\.(sin|cos|tan|asin|acos|atan|sinh|cosh|tanh|asinh|log|log10|exp|pow|sqrt|cbrt|abs|floor|ceil|round|PI|E))*$/.test(expr)) {
+        showError(getText('errorInvalid'));
+        return;
+      }
+
+      const result = Function(`"use strict"; return (${expr})`)();
+
+      if(result === Infinity || result === -Infinity) {
+        showError(getText('errorDivision'));
+        return;
+      }
+      if(isNaN(result)) {
+        showError(getText('errorCalculation'));
+        return;
+      }
+
+      addHistory(expr + ' = ' + result);
+      display.textContent = result;
+      display.classList.add('success');
+
+    } catch {
+      showError(getText('errorExpression'));
+    }
+  }
+
+  function showError(msg) {
+    display.textContent = msg;
+    display.classList.add('error');
+  }
+
+  function backspace() {
+    vibrate(30);
+    if(display.classList.contains('error')) {
+      display.classList.remove('error');
+      display.textContent = '0';
+      return;
+    }
+    if(display.textContent.length > 1) {
+      display.textContent = display.textContent.slice(0, -1);
+    } else {
+      display.textContent = '0';
+    }
+  }
+
+  function clearDisplay() {
+    vibrate(50);
+    display.classList.remove('error', 'success');
+    display.textContent = '0';
+  }
+
+  // Yeni elmi funksiyalar
+  function factorial() {
+    const n = parseFloat(display.textContent);
+    if(isNaN(n) || n < 0 || n > 170 || !Number.isInteger(n)) {
+      showError(getText('errorFactorial'));
+      return;
+    }
+    let result = 1;
+    for(let i = 2; i <= n; i++) {
+      result *= i;
+    }
+    addHistory(n + '! = ' + result);
+    display.textContent = result;
+  }
+
+  function randomNumber() {
+    const result = Math.random();
+    addHistory('rand() = ' + result);
+    display.textContent = result;
+  }
+
+  function degToRad() {
+    const deg = parseFloat(display.textContent);
+    if(isNaN(deg)) {
+      showError(getText('errorNumber'));
+      return;
+    }
+    const rad = deg * Math.PI / 180;
+    addHistory(deg + '° = ' + rad + ' rad');
+    display.textContent = rad;
+  }
+
+  // Tarixçə funksiyaları
+  function addHistory(item) {
+    history.unshift(item);
+    if(history.length > 30) history.pop();
+    renderHistory();
+  }
+
+  function renderHistory() {
+    historyList.innerHTML = '';
+    history.forEach((item) => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      li.onclick = () => {
+        const result = item.split('=')[1]?.trim();
+        if(result) {
+          display.textContent = result;
+          display.classList.remove('error');
+        }
+      };
+      historyList.appendChild(li);
+    });
+  }
+
+  // Sabitlər paneli
+  function renderConstants() {
+    constantsList.innerHTML = '';
+    const currentLang = languageSelect.value;
+    Object.entries(physicsConstants).forEach(([key, constant]) => {
+      const div = document.createElement('div');
+      div.className = 'constant-item';
+      div.innerHTML = `
+        <span class="constant-name">${constant.names[currentLang]}</span>
+        <span class="constant-value">${constant.value.toExponential(3)}</span>
+      `;
+      div.onclick = () => {
+        display.textContent = constant.value;
+        display.classList.remove('error');
+      };
+      constantsList.appendChild(div);
+    });
+  }
+
+  // Mətn alma funksiyası
+  function getText(key) {
+    const lang = languageSelect.value;
+    return texts[lang][key] || texts.az[key] || '';
+  }
+
+  // Dil yeniləmə funksiyası
+  function updateLanguage() {
+    // Başlıq
+    document.querySelector('h1').textContent = getText('title');
+    
+    // Tarixçə başlığı
+    document.querySelector('#history h2').textContent = getText('history');
+    
+    // Sabitlər başlığı
+    document.querySelector('#constants h2').textContent = getText('constants');
+    
+    // Təmizlə düyməsi
+    clearHistoryBtn.textContent = getText('clear');
+    
+    // Mövzu düyməsi
+    if(document.body.classList.contains('light')) {
+      themeToggleBtn.textContent = getText('themeDark');
+    } else {
+      themeToggleBtn.textContent = getText('themeLight');
+    }
+    
+    // Rəng seçimi adları
+    updateColorNames();
+    
+    // Sabitləri yenilə
+    renderConstants();
+  }
+
+  // Rəng adlarını yenilə
+  function updateColorNames() {
+    const colorOptions = colorPicker.options;
+    const colorKeys = ['colorBlue', 'colorRed', 'colorGreen', 'colorOrange', 'colorPurple', 'colorGray'];
+    
+    for(let i = 0; i < colorOptions.length && i < colorKeys.length; i++) {
+      colorOptions[i].textContent = getText(colorKeys[i]);
+    }
+  }
+
+  // Mövzu dəyişmə
+  function toggleTheme() {
+    if(document.body.classList.contains('light')) {
+      document.body.classList.replace('light', 'dark');
+      themeToggleBtn.textContent = getText('themeLight');
+    } else {
+      document.body.classList.replace('dark', 'light');
+      themeToggleBtn.textContent = getText('themeDark');
+    }
+  }
+
+  // Rəng dəyişmə
+  function updateMainColor(hex) {
+    document.documentElement.style.setProperty('--main-color', hex);
+    const rgb = hexToRgb(hex);
+    document.documentElement.style.setProperty('--main-rgb', rgb);
+  }
+
+  function hexToRgb(hex) {
+    hex = hex.replace(/^#/, '');
+    if(hex.length === 3) {
+      hex = hex.split('').map(c => c + c).join('');
+    }
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return `${r},${g},${b}`;
+  }
+
+  // Event listeners
+  themeToggleBtn.addEventListener('click', toggleTheme);
+  colorPicker.addEventListener('change', () => updateMainColor(colorPicker.value));
+  languageSelect.addEventListener('change', updateLanguage);
+  clearHistoryBtn.addEventListener('click', () => {
+    history = [];
+    renderHistory();
+  });
+
+  // Klaviatura dəstəyi
+  document.addEventListener('keydown', (e) => {
+    const allowedKeys = '0123456789+-*/().';
+    if(allowedKeys.includes(e.key)) {
+      e.preventDefault();
+      handleClick(e.key);
+    } else if(e.key === 'Enter' || e.key === '=') {
+      e.preventDefault();
+      calculate();
+    } else if(e.key === 'Backspace') {
+      e.preventDefault();
+      backspace();
+    } else if(e.key.toLowerCase() === 'c') {
+      e.preventDefault();
+      clearDisplay();
+    }
+  });
+
+  // Swipe gesture dəstəyi tarixçə üçün
+  function addSwipeSupport() {
+    let startX, startY, distX, distY;
+    const threshold = 100; // minimum swipe distance
+    const restraint = 100; // maximum distance perpendicular to swipe direction
+    
+    historyList.addEventListener('touchstart', function(e) {
+      const touchobj = e.changedTouches[0];
+      startX = touchobj.pageX;
+      startY = touchobj.pageY;
+    }, {passive: true});
+    
+    historyList.addEventListener('touchend', function(e) {
+      const touchobj = e.changedTouches[0];
+      distX = touchobj.pageX - startX;
+      distY = touchobj.pageY - startY;
+      
+      if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+        if (distX > 0) {
+          // Sağa swipe - tarixçəni təmizlə
+          if(history.length > 0) {
+            vibrate(100);
+            history = [];
+            renderHistory();
+          }
+        }
+      }
+    }, {passive: true});
+  }
+
+  // Orientation dəyişikliyi dinləyicisi
+  function handleOrientationChange() {
+    // Orientation dəyişdikdə layout-u yenilə
+    setTimeout(() => {
+      updateMainColor(colorPicker.value);
+      renderConstants();
+    }, 100);
+  }
+
+  // Başlanğıc
+  function initialize() {
+    updateMainColor(colorPicker.value);
+    updateLanguage();
+    renderHistory();
+    renderConstants();
+    addSwipeSupport();
+    
+    // Orientation change listener
+    window.addEventListener('orientationchange', handleOrientationChange);
+    window.addEventListener('resize', handleOrientationChange);
+  }
+
+  // Mükafatlı Reklam Sistemi
+  let isPremium = false;
+  let premiumEndTime = 0;
+  let adEarnings = parseFloat(localStorage.getItem('adEarnings') || '0');
+  
+  // Premium funksiyalar
+  function usePremiumFunction(funcType) {
+    if (!isPremium) {
+      showRewardedAdOffer(funcType);
+      return;
+    }
+    
+    // Premium funksiya istifadəsi
+    switch(funcType) {
+      case 'log10':
+        display.textContent += 'Math.log10(';
+        break;
+      case 'ln':
+        display.textContent += 'Math.log(';
+        break;
+      case 'exp':
+        display.textContent += 'Math.exp(';
+        break;
+    }
+  }
+  
+  // Mükafatlı reklam təklifi
+  function showRewardedAdOffer(funcType) {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 10000;
+      display: flex; justify-content: center; align-items: center;
+    `;
+    
+    const popup = document.createElement('div');
+    popup.style.cssText = `
+      background: var(--bg-color); padding: 30px; border-radius: 20px;
+      text-align: center; max-width: 350px; margin: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    `;
+    
+    const funcNames = {
+      log10: 'Onluq Loqarifm',
+      ln: 'Təbii Loqarifm', 
+      exp: 'Eksponensial'
+    };
+    
+    popup.innerHTML = `
+      <h3 style="color: var(--main-color); margin-bottom: 20px;">
+        🔒 Premium Funksiya
+      </h3>
+      <p style="margin-bottom: 20px; color: var(--text-color);">
+        <strong>${funcNames[funcType]}</strong> istifadə etmək üçün reklam izləyin!
+      </p>
+      <div style="margin-bottom: 20px;">
+        <div style="font-size: 0.9em; opacity: 0.8; margin-bottom: 10px;">
+          • 30 saniyə reklam izləyin<br>
+          • 5 dəqiqə premium əldə edin<br>
         </div>
       </div>
-
-      <!-- AdMob Banner Reklamı -->
-      <div class="ad-container">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-app-pub-828564172053236"
-             data-ad-slot="9481846089"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <button onclick="watchRewardedAd('${funcType}')" 
+              style="background: linear-gradient(135deg, #4CAF50, #45a049); 
+                     color: white; border: none; padding: 12px 25px; 
+                     border-radius: 25px; font-size: 1rem; cursor: pointer; 
+                     margin-right: 10px;">
+        🎥 Reklam İzlə
+      </button>
+      <button onclick="closeModal()" 
+              style="background: #e74c3c; color: white; border: none; 
+                     padding: 12px 25px; border-radius: 25px; 
+                     font-size: 1rem; cursor: pointer;">
+        İmtina
+      </button>
+    `;
+    
+    modal.appendChild(popup);
+    document.body.appendChild(modal);
+    
+    window.closeModal = () => {
+      document.body.removeChild(modal);
+    };
+  }
+  
+  // Reklam izləmə simulyasiyasi
+  function watchRewardedAd(funcType) {
+    closeModal();
+    
+    // Reklam izləmə animasiyasi
+    const adModal = document.createElement('div');
+    adModal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #000; z-index: 10001; display: flex;
+      justify-content: center; align-items: center; flex-direction: column;
+    `;
+    
+    adModal.innerHTML = `
+      <div style="color: white; text-align: center;">
+        <h2>🎥 Reklam İzlənir...</h2>
+        <div style="width: 300px; height: 20px; background: #333; 
+                    border-radius: 10px; overflow: hidden; margin: 20px 0;">
+          <div id="adProgress" style="width: 0%; height: 100%; 
+                                      background: linear-gradient(90deg, #4CAF50, #45a049); 
+                                      transition: width 0.1s ease;"></div>
+        </div>
+        <p id="adTimer">30 saniyə qalır...</p>
+        <p style="font-size: 0.9em; opacity: 0.7;">Reklamı tam izləyin ki, mükafatı alın</p>
+      </div>
+    `;
+    
+    document.body.appendChild(adModal);
+    
+    // 30 saniyəlik geri sayım
+    let timeLeft = 30;
+    const timer = setInterval(() => {
+      timeLeft--;
+      const progress = ((30 - timeLeft) / 30) * 100;
+      document.getElementById('adProgress').style.width = progress + '%';
+      document.getElementById('adTimer').textContent = timeLeft + ' saniyə qalır...';
+      
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        completeRewardedAd(funcType, adModal);
+      }
+    }, 1000);
+  }
+  
+  // Reklam tamamlandıqda
+  function completeRewardedAd(funcType, adModal) {
+    document.body.removeChild(adModal);
+    
+    // Premium aktivləşdir
+    isPremium = true;
+    premiumEndTime = Date.now() + (5 * 60 * 1000); // 5 dəqiqə
+    
+    // Gəlir əlavə et
+    adEarnings += 0.05;
+    localStorage.setItem('adEarnings', adEarnings.toString());
+    
+    // Premium status göstər
+    showPremiumStatus();
+    
+    // Premium düymələri aktiv et
+    updatePremiumButtons();
+    
+    // İstənilən funksiyani işlət
+    usePremiumFunction(funcType);
+    
+    // Mükafat popupı
+    showRewardPopup();
+  }
+  
+  // Premium status göstərici
+  function showPremiumStatus() {
+    const statusDiv = document.getElementById('premiumStatus');
+    statusDiv.style.display = 'block';
+    
+    const timer = setInterval(() => {
+      const timeLeft = Math.max(0, premiumEndTime - Date.now());
+      if (timeLeft <= 0) {
+        isPremium = false;
+        statusDiv.style.display = 'none';
+        updatePremiumButtons();
+        clearInterval(timer);
+        return;
+      }
+      
+      const minutes = Math.floor(timeLeft / 60000);
+      const seconds = Math.floor((timeLeft % 60000) / 1000);
+      document.getElementById('premiumTimer').textContent = 
+        `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+  }
+  
+  // Premium düymələri yenile
+  function updatePremiumButtons() {
+    const premiumBtns = document.querySelectorAll('.premium-btn');
+    premiumBtns.forEach(btn => {
+      btn.disabled = !isPremium;
+      if (isPremium) {
+        btn.classList.add('unlocked');
+      } else {
+        btn.classList.remove('unlocked');
+      }
+    });
+  }
+  
+  // Mükafat popupı
+  function showRewardPopup() {
+    const popup = document.createElement('div');
+    popup.style.cssText = `
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      background: var(--bg-color); border: 3px solid #4CAF50;
+      border-radius: 20px; padding: 30px; z-index: 10002;
+      text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      animation: rewardShow 0.5s ease-out;
+    `;
+    
+    popup.innerHTML = `
+      <h2 style="color: #4CAF50; margin-bottom: 20px;">
+        🎉 Təbriklər!
+      </h2>
+      <p style="margin-bottom: 15px; color: var(--text-color);">
+        ⭐ 5 dəqiqə Premium aktiv edildi!<br>
+  
+      <button onclick="this.parentElement.remove()" 
+              style="background: #4CAF50; color: white; border: none; 
+                     padding: 10px 20px; border-radius: 15px; 
+                     font-size: 1rem; cursor: pointer;">
+        Davam et
+      </button>
+    `;
+    
+    document.body.appendChild(popup);
+    
+    // 3 saniyə sonra avtomatik bağla
+    setTimeout(() => {
+      if (popup.parentElement) {
+        popup.remove();
+      }
+    }, 3000);
+  }
+  
+  // Reward Ad düyməsi event listener
+  document.getElementById('rewardAdBtn').addEventListener('click', () => {
+    showRewardedAdOffer('log10');
+  });
+  
+  // Başlanqıcda premium düymələri deaktiv et
+  updatePremiumButtons();
+  
+  initialize();
+  
+  // ===== YENİ FUNKSİYALAR =====
+  
+  // Vahid çevirmə sistemi
+  function showUnitConverter() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 10000;
+      display: flex; justify-content: center; align-items: center;
+    `;
+    
+    // Klaviatura dəstəyi
+    const handleKeyPress = (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === 'Enter') {
+        convertUnit();
+      }
+    };
+    
+    document.addEventListener('keydown', handleKeyPress);
+    
+    const popup = document.createElement('div');
+    popup.style.cssText = `
+      background: var(--bg-color); padding: 30px; border-radius: 20px;
+      text-align: center; max-width: 400px; margin: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3); max-height: 80vh; overflow-y: auto;
+    `;
+    
+    popup.innerHTML = `
+      <h3 style="color: var(--main-color); margin-bottom: 20px;">📏 Vahid Çevirmələri</h3>
+      
+      <div style="margin-bottom: 20px;">
+        <select id="unitType" style="padding: 8px; margin: 5px; border-radius: 8px; border: 1px solid #ccc;">
+          <option value="length">Uzunluq</option>
+          <option value="weight">Çəki</option>
+          <option value="temperature">Temperatur</option>
+          <option value="area">Sahə</option>
+        </select>
+      </div>
+      
+      <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <input type="text" id="fromValue" placeholder="Dəyər" 
+               style="padding: 8px; border-radius: 8px; border: 1px solid #ccc; width: 100px;">
+        <select id="fromUnit" style="padding: 8px; border-radius: 8px; border: 1px solid #ccc;"></select>
+      </div>
+      
+      <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <span style="align-self: center;">→</span>
+        <select id="toUnit" style="padding: 8px; border-radius: 8px; border: 1px solid #ccc;"></select>
+      </div>
+      
+      <div style="margin: 10px 0;">
+        <button onclick="convertUnit()" 
+                style="background: var(--main-color); color: white; border: none; 
+                       padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+          Çevir →
+        </button>
+      </div>
+      
+      <div id="conversionResult" style="margin-top: 15px; padding: 10px; 
+           background: rgba(var(--main-rgb), 0.1); border-radius: 10px; display: none;">
+      </div>
+      
+      <button onclick="closeModal()" 
+              style="background: #e74c3c; color: white; border: none; 
+                     padding: 10px 20px; border-radius: 10px; margin-top: 15px; cursor: pointer;">
+        Bağla
+      </button>
+    `;
+    
+    modal.appendChild(popup);
+    document.body.appendChild(modal);
+    
+    // Vahid seçimlərini yüklə
+    loadUnitOptions();
+    
+    // Vahid tipi dəyişdikdə yenilə
+    document.getElementById('unitType').addEventListener('change', loadUnitOptions);
+    
+    window.closeModal = () => {
+      document.removeEventListener('keydown', handleKeyPress);
+      document.body.removeChild(modal);
+    };
+  }
+  
+  // Vahid seçimlərini yüklə
+  function loadUnitOptions() {
+    const unitType = document.getElementById('unitType').value;
+    const fromUnit = document.getElementById('fromUnit');
+    const toUnit = document.getElementById('toUnit');
+    
+    const units = {
+      length: ['metr', 'kilometr', 'santimetr', 'millimetr', 'yard', 'fut', 'düym'],
+      weight: ['kiloqram', 'qram', 'ton', 'funt', 'ons'],
+      temperature: ['Celsius', 'Fahrenheit', 'Kelvin'],
+      area: ['kvadrat metr', 'hektar', 'akr', 'kvadrat fut']
+    };
+    
+    const currentUnits = units[unitType];
+    fromUnit.innerHTML = '';
+    toUnit.innerHTML = '';
+    
+    currentUnits.forEach(unit => {
+      fromUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+      toUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+    });
+    
+    // To unit-i fərqli seç
+    if (currentUnits.length > 1) {
+      toUnit.selectedIndex = 1;
+    }
+  }
+  
+  // Vahid çevir
+  function convertUnit() {
+    const fromValue = parseFloat(document.getElementById('fromValue').value);
+    const fromUnit = document.getElementById('fromUnit').value;
+    const toUnit = document.getElementById('toUnit').value;
+    const unitType = document.getElementById('unitType').value;
+    
+    if (isNaN(fromValue)) {
+      alert('Zəhmət olmasa düzgün dəyər daxil edin!');
+      return;
+    }
+    
+    let result = 0;
+    
+    // Çevirmə düsturları
+    if (unitType === 'length') {
+      result = convertLength(fromValue, fromUnit, toUnit);
+    } else if (unitType === 'weight') {
+      result = convertWeight(fromValue, fromUnit, toUnit);
+    } else if (unitType === 'temperature') {
+      result = convertTemperature(fromValue, fromUnit, toUnit);
+    } else if (unitType === 'area') {
+      result = convertArea(fromValue, fromUnit, toUnit);
+    }
+    
+    document.getElementById('conversionResult').innerHTML = 
+      `<strong>${fromValue} ${fromUnit} = ${result.toFixed(4)} ${toUnit}</strong>`;
+    document.getElementById('conversionResult').style.display = 'block';
+    
+    // Achievement əlavə et
+    addAchievement('converter', 'Vahid çevirmə istifadə etdi');
+  }
+  
+  // Uzunluq çevirməsi
+  function convertLength(value, from, to) {
+    const toMeter = {
+      'metr': 1,
+      'kilometr': 1000,
+      'santimetr': 0.01,
+      'millimetr': 0.001,
+      'yard': 0.9144,
+      'fut': 0.3048,
+      'düym': 0.0254
+    };
+    
+    const meters = value * toMeter[from];
+    return meters / toMeter[to];
+  }
+  
+  // Çəki çevirməsi
+  function convertWeight(value, from, to) {
+    const toKg = {
+      'kiloqram': 1,
+      'qram': 0.001,
+      'ton': 1000,
+      'funt': 0.453592,
+      'ons': 0.0283495
+    };
+    
+    const kg = value * toKg[from];
+    return kg / toKg[to];
+  }
+  
+  // Temperatur çevirməsi
+  function convertTemperature(value, from, to) {
+    let celsius = 0;
+    
+    // Əvvəlcə Celsius-a çevir
+    if (from === 'Celsius') celsius = value;
+    else if (from === 'Fahrenheit') celsius = (value - 32) * 5/9;
+    else if (from === 'Kelvin') celsius = value - 273.15;
+    
+    // Sonra hədəf vahidə çevir
+    if (to === 'Celsius') return celsius;
+    else if (to === 'Fahrenheit') return celsius * 9/5 + 32;
+    else if (to === 'Kelvin') return celsius + 273.15;
+  }
+  
+  // Sahə çevirməsi
+  function convertArea(value, from, to) {
+    const toSqMeter = {
+      'kvadrat metr': 1,
+      'hektar': 10000,
+      'akr': 4046.86,
+      'kvadrat fut': 0.092903
+    };
+    
+    const sqMeters = value * toSqMeter[from];
+    return sqMeters / toSqMeter[to];
+  }
+  
+  // Riyaziyyat oyunu
+  function showMathGame() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 10000;
+      display: flex; justify-content: center; align-items: center;
+    `;
+    
+    const popup = document.createElement('div');
+    popup.style.cssText = `
+      background: var(--bg-color); padding: 30px; border-radius: 20px;
+      text-align: center; max-width: 400px; margin: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    `;
+    
+    let score = 0;
+    let timeLeft = 60;
+    let gameInterval;
+    
+    function generateQuestion() {
+      const operations = ['+', '-', '*'];
+      const num1 = Math.floor(Math.random() * 20) + 1;
+      const num2 = Math.floor(Math.random() * 20) + 1;
+      const operation = operations[Math.floor(Math.random() * operations.length)];
+      
+      let answer;
+      switch(operation) {
+        case '+': answer = num1 + num2; break;
+        case '-': answer = num1 - num2; break;
+        case '*': answer = num1 * num2; break;
+      }
+      
+      return { question: `${num1} ${operation} ${num2} = ?`, answer: answer };
+    }
+    
+    let currentQuestion = generateQuestion();
+    
+    popup.innerHTML = `
+      <h3 style="color: var(--main-color); margin-bottom: 20px;">🎮 Riyaziyyat Oyunu</h3>
+      
+      <div style="margin-bottom: 20px;">
+        <div style="font-size: 1.2em; margin-bottom: 10px;">${currentQuestion.question}</div>
+        <input type="text" id="gameAnswer" placeholder="Cavabınız" 
+               style="padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 150px;">
       </div>
 
-      <!-- AdMob Rewarded Reklamı (Örnek) -->
-      <button id="rewarded-ad-btn">Mükafatlı Reklam İzle</button>
-      <div id="rewarded-ad-status"></div>
-
-      <!-- AdMob Interstitial Reklamı (Örnek) -->
-      <button id="interstitial-ad-btn">Tam Ekran Reklam İzle</button>
-      <div id="interstitial-ad-status"></div>
-
-      <div class="history">
-        <h2>Tarixçə</h2>
-        <button>Təmizlə</button>
-        <div id="history-content"></div>
+      <div style="margin-bottom: 15px;">
+        <div>Xal: <span id="gameScore">${score}</span></div>
+        <div>Vaxt: <span id="gameTime">${timeLeft}</span> saniyə</div>
       </div>
+      
+      <button onclick="checkAnswer()" 
+              style="background: var(--main-color); color: white; border: none; 
+                     padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+        Cavabla
+      </button>
+      
+      <button onclick="closeModal()" 
+              style="background: #e74c3c; color: white; border: none; 
+                     padding: 10px 20px; border-radius: 10px; margin-left: 10px; cursor: pointer;">
+        Bitir
+      </button>
+    `;
 
-      <div class="constants">
-        <h2>Fiziki Sabitlər</h2>
-        <div id="constants-content"></div>
+    document.getElementById("gameAnswer")?.focus();
+
+
+    modal.appendChild(popup);
+    document.body.appendChild(modal);
+    
+    // Input sahəsini avtomatik fokusla
+    setTimeout(() => {
+      const input = document.getElementById('gameAnswer');
+      if (input) input.focus();
+    }, 100);
+
+        // Klaviatura dəstəyi
+    function handleGameKeyPress(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+  } else if (e.key === 'Enter') {
+    checkAnswer();
+  }
+}
+
+const input = document.getElementById('gameAnswer');
+if (input) {
+  input.addEventListener('keydown', handleGameKeyPress);
+}
+
+    // Oyun vaxtını başlat
+    gameInterval = setInterval(() => {
+      timeLeft--;
+      document.getElementById('gameTime').textContent = timeLeft;
+      
+      if (timeLeft <= 0) {
+        clearInterval(gameInterval);
+        endGame();
+      }
+    }, 1000);
+    
+    window.checkAnswer = () => {
+      const userAnswer = parseInt(document.getElementById('gameAnswer').value);
+      
+      if (userAnswer === currentQuestion.answer) {
+        score += 10;
+        document.getElementById('gameScore').textContent = score;
+        currentQuestion = generateQuestion();
+        document.getElementById('gameAnswer').value = '';
+        document.querySelector('div[style*="font-size: 1.2em"]').textContent = currentQuestion.question;
+      } else {
+        alert('Yanlış cavab! Düzgün cavab: ' + currentQuestion.answer);
+      }
+    };
+    
+    window.endGame = () => {
+      clearInterval(gameInterval);
+      popup.innerHTML = `
+        <h3 style="color: var(--main-color); margin-bottom: 20px;">🎉 Oyun Bitdi!</h3>
+        <div style="margin-bottom: 20px;">
+          <div>Yekun xal: <strong>${score}</strong></div>
+          <div>Dəqiq cavablar: <strong>${Math.floor(score/10)}</strong></div>
+        </div>
+        <button onclick="closeModal()" 
+                style="background: var(--main-color); color: white; border: none; 
+                       padding: 10px 20px; border-radius: 10px; cursor: pointer;">
+          Bağla
+        </button>
+      `;
+      
+      // Achievement əlavə et
+      addAchievement('mathGame', `Riyaziyyat oyununda ${score} xal qazandı`);
+    };
+    
+    window.closeModal = () => {
+      clearInterval(gameInterval);
+    const input = document.getElementById('gameAnswer');
+if (input) {
+  input.removeEventListener('keydown', handleGameKeyPress);
+}
+      document.body.removeChild(modal);
+    };
+  }
+  
+  // Achievement sistemi
+  let achievements = JSON.parse(localStorage.getItem('achievements') || '[]');
+  let totalCalculations = parseInt(localStorage.getItem('totalCalculations') || '0');
+  
+  function addAchievement(type, description) {
+    const achievement = {
+      id: type + '_' + Date.now(),
+      type: type,
+      description: description,
+      date: new Date().toLocaleDateString(),
+      earned: true
+    };
+    
+    // Təkrarlanmayan achievement-lər üçün yoxla
+    const existing = achievements.find(a => a.type === type);
+    if (!existing) {
+      achievements.push(achievement);
+      localStorage.setItem('achievements', JSON.stringify(achievements));
+      showAchievementNotification(description);
+    }
+  }
+  
+  function showAchievementNotification(description) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #4CAF50, #45a049);
+      color: white; padding: 15px 20px; border-radius: 10px; z-index: 10003;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: slideIn 0.5s ease;
+    `;
+    
+    notification.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.5em;">🏆</span>
+        <div>
+          <div style="font-weight: bold;">Mükafat Qazanıldı!</div>
+          <div style="font-size: 0.9em;">${description}</div>
+        </div>
       </div>
-    </main>
-  </div>
-  <script src="script.js"></script>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.remove();
+    }, 3000);
+  }
+  
+  function showAchievements() {
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); z-index: 10000;
+      display: flex; justify-content: center; align-items: center;
+    `;
+    
+    const popup = document.createElement('div');
+    popup.style.cssText = `
+      background: var(--bg-color); padding: 30px; border-radius: 20px;
+      text-align: center; max-width: 500px; margin: 20px; max-height: 80vh; overflow-y: auto;
+    `;
+    
+    const stats = `
+      <div style="margin-bottom: 20px; padding: 15px; background: rgba(var(--main-rgb), 0.1); border-radius: 10px;">
+        <div><strong>Ümumi hesablamalar:</strong> ${totalCalculations}</div>
+        <div><strong>Qazanılan mükafatlar:</strong> ${achievements.length}</div>
+      </div>
+    `;
+    
+    const achievementsList = achievements.length > 0 ? 
+      achievements.map(a => `
+        <div style="margin: 10px 0; padding: 10px; background: rgba(76, 175, 80, 0.1); 
+                    border-radius: 8px; text-align: left;">
+          <div style="font-weight: bold;">🏆 ${a.description}</div>
+          <div style="font-size: 0.9em; opacity: 0.8;">${a.date}</div>
+        </div>
+      `).join('') : 
+      '<div style="opacity: 0.7;">Hələ heç bir mükafat qazanılmayıb</div>';
+    
+    popup.innerHTML = `
+      <h3 style="color: var(--main-color); margin-bottom: 20px;">🏆 Mükafatlar</h3>
+      ${stats}
+      <div style="text-align: left;">
+        ${achievementsList}
+      </div>
+      <button onclick="closeModal()" 
+              style="background: var(--main-color); color: white; border: none; 
+                     padding: 10px 20px; border-radius: 10px; margin-top: 15px; cursor: pointer;">
+        Bağla
+      </button>
+    `;
+    
+    modal.appendChild(popup);
+    document.body.appendChild(modal);
+    
+    window.closeModal = () => {
+      document.body.removeChild(modal);
+    };
+  }
+  
+  // Hesablama sayını artır
+  const originalCalculate = calculate;
+  calculate = function() {
+    totalCalculations++;
+    localStorage.setItem('totalCalculations', totalCalculations.toString());
+    
+    // Hər 10 hesablama üçün achievement
+    if (totalCalculations % 10 === 0) {
+      addAchievement('calculations', `${totalCalculations} hesablama tamamladı`);
+    }
+    
+    originalCalculate();
+  };
+  
+  // CSS animasiyaları
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+
+<!-- PWA Service Worker Registration -->
+<script>
+  // PWA Service Worker qeydiyyatı
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then((registration) => {
+          console.log('SW qeydiyyatdan keçdi: ', registration.scope);
+          
+          // Yenilənmə yoxla
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // Yeni versiya mövcuddur
+                if (confirm('Yeni versiya mövcuddur. Yenilənsin?')) {
+                  window.location.reload();
+                }
+              }
+            });
+          });
+        })
+        .catch((error) => {
+          console.log('SW qeydiyyat xətası: ', error);
+        });
+    });
+  }
+
+  // PWA quraşdırma düyməsi
+  let deferredPrompt;
+  const installButton = document.createElement('button');
+  installButton.textContent = '📱 App Quraşdır';
+  installButton.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--main-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 1000;
+    display: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    select, .theme-toggle {
+    background: var(--bg-color); color: var(--text-color); border: 2px solid var(--main-color);
+    padding: 8px 12px; border-radius: 8px; font-size: 0.9rem; cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .theme-toggle:hover {
+    background: var(--main-color);
+    transform: translateY(-2px);
+  }
+  
+  /* Mükafatlı Reklam Düyməsi */
+  .reward-ad-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  }
+  
+  .reward-ad-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  }
+  
+  /* Premium Status */
+  .premium-status {
+    text-align: center;
+    padding: 10px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border-radius: 10px;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    animation: premiumGlow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes premiumGlow {
+    from { box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); }
+    to { box-shadow: 0 0 20px rgba(76, 175, 80, 0.8); }
+  }
+  
+  /* Premium Düymələr */
+  .premium-btn {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad) !important;
+    color: white !important;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .premium-btn:disabled {
+    background: #bdc3c7 !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .premium-btn:not(:disabled):hover {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6) !important;
+    transform: translateY(-2px);
+  }
+  
+  .premium-btn::before {
+    content: '🔒';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.7rem;
+    opacity: 0.8;
+  }
+  
+  .premium-btn.unlocked::before {
+    content: '⭐';
+  }
+  `;
+  
+  installButton.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('PWA quraşdırıldı');
+      }
+      deferredPrompt = null;
+      installButton.style.display = 'none';
+    }
+  });
+  
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installButton.style.display = 'block';
+  });
+  
+  window.addEventListener('appinstalled', () => {
+    console.log('PWA quraşdırıldı');
+    installButton.style.display = 'none';
+    deferredPrompt = null;
+  });
+  
+  document.body.appendChild(installButton);
+</script>
+
+<!-- Premium Features -->
+<script src="premium-features.js"></script>
+
+<!-- AdMob Banner Reklam -->
+<div id="admob-banner" style="text-align: center; margin: 20px 0; padding: 10px;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXX"
+       data-ad-slot="YYYYYYYYYY"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
   <script>
-    // Rewarded Ad Örneği (JavaScript ile aktivləşdirilməli)
-    document.getElementById('rewarded-ad-btn').addEventListener('click', () => {
-      if (typeof AdMob !== 'undefined') {
-        AdMob.rewarded.prepare('ca-app-pub-828564172053236/KenanCalc_Rewarded');
-        AdMob.rewarded.show();
-      } else {
-        document.getElementById('rewarded-ad-status').innerText = 'Reklam yüklənmədi.';
-      }
-    });
-
-    // Interstitial Ad Örneği (JavaScript ile aktivləşdirilməli)
-    document.getElementById('interstitial-ad-btn').addEventListener('click', () => {
-      if (typeof AdMob !== 'undefined') {
-        AdMob.interstitial.prepare('ca-app-pub-828564172053236/Interstitial_Ad_1');
-        AdMob.interstitial.show();
-      } else {
-        document.getElementById('interstitial-ad-status').innerText = 'Reklam yüklənmədi.';
-      }
-    });
+       (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
+</div>
+
 </body>
 </html>
