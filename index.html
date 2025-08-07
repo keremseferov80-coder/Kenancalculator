@@ -1402,6 +1402,11 @@
       const input = document.getElementById('gameAnswer');
       if (input) input.focus();
     }, 100);
+
+    const input = document.getElementById('gameAnswer');
+if (input) {
+  input.addEventListener('keydown', handleGameKeyPress);
+}
     
     // Klaviatura dəstəyi
     const handleGameKeyPress = (e) => {
@@ -1411,8 +1416,7 @@
         checkAnswer();
       }
     };
-    
-    document.addEventListener('keydown', handleGameKeyPress);
+ 
     
     // Oyun vaxtını başlat
     gameInterval = setInterval(() => {
@@ -1460,7 +1464,10 @@
     
     window.closeModal = () => {
       clearInterval(gameInterval);
-      document.removeEventListener('keydown', handleGameKeyPress);
+    const input = document.getElementById('gameAnswer');
+if (input) {
+  input.removeEventListener('keydown', handleGameKeyPress);
+}
       document.body.removeChild(modal);
     };
   }
