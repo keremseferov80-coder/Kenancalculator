@@ -1769,8 +1769,62 @@ if (input) {
        data-full-width-responsive="true"></ins>
   <script>
        (adsbygoogle = window.adsbygoogle || []).push({});
+
+ <!-- Rewarded Reklam -->
+<script>
+  // Rewarded reklam üçün konfiqurasiya
+  if (window.AdMob && AdMob.rewardvideo) {
+    AdMob.rewardvideo.config({
+      id: 'ca-app-pub-8288564172053236/1396292740',
+      isTesting: false,
+      autoShow: false
+    });
+  }
+
+  function showRewardedAd() {
+    if (window.AdMob && AdMob.rewardvideo) {
+      AdMob.rewardvideo.prepare();
+      AdMob.rewardvideo.show();
+    } else {
+      alert("Rewarded reklam yalnız APK faylında işləyir.");
+    }
+  }
+</script>
+
+
+   <!-- Interstitial Reklam -->
+<script>
+  if (window.AdMob && AdMob.interstitial) {
+    AdMob.interstitial.config({
+      id: 'ca-app-pub-8288564172053236/7175248943',
+      isTesting: false,
+      autoShow: false
+    });
+  }
+
+  function showInterstitialAd() {
+    if (window.AdMob && AdMob.interstitial) {
+      AdMob.interstitial.prepare();
+      AdMob.interstitial.show();
+    } else {
+      alert("Interstitial reklam yalnız APK faylında işləyir.");
+    }
+  }
+</script>
+
+
+
   </script>
 </div>
+
+
+  <!-- Rewarded Reklam Button -->
+<button onclick="showRewardedAd()" style="margin: 20px; padding: 10px 20px;">
+  🎁 Reklama Bax və Mükafat Qazan
+</button>
+
+
+<button onclick="showInterstitialAd()">Reklama bax (Interstitial)</button>
 
 
 </body>
