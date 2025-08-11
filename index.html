@@ -281,9 +281,10 @@
       <button class="theme-toggle" id="themeToggle">Qaranlıq Mövzu</button>
       
       <!-- Mükafatlı Reklam Düyməsi -->
-      <button class="reward-ad-btn" id="rewardAdBtn" title="Reklam izləyib premium funksiyalar əldə et">
-        🎁 Premium Al
-      </button>
+    <button class="reward-ad-btn" id="rewardAdBtn" title="Reklam izləyib premium funksiyalar əldə et" onclick="showRewardedAd()">
+    🎁 Premium Al
+</button>
+
     </div>
     
     <!-- Premium Status -->
@@ -1818,13 +1819,18 @@ if (input) {
 </div>
 
 
-  <!-- Rewarded Reklam Button -->
-<button onclick="showRewardedAd()" style="margin: 20px; padding: 10px 20px;">
-  🎁 Reklama Bax və Mükafat Qazan
-</button>
-
 
 <button onclick="showInterstitialAd()">Reklama bax (Interstitial)</button>
+<script>
+
+function showRewardedAd() {
+    if (typeof Android !== "undefined" && Android.showRewardedAd) {
+        Android.showRewardedAd();
+    } else {
+        alert("Reklam funksiyası mövcud deyil.");
+    }
+}
+</script>
 
 
 </body>
